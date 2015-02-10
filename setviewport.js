@@ -37,7 +37,7 @@
     $(function(){
       $('html,body').animate({scrollTop: 0}, 1);
       setTimeout(function (){
-        var w1 = $(window).height() < $(window).width() ? $(window).height() : $(window).width();
+        var w1 = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         $('meta[name="viewport"]').remove();
         var x = 360/w1;
         var out = Math.ceil(widthToSet*x);
