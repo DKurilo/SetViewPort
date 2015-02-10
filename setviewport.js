@@ -10,24 +10,27 @@
  * <script src="setviewport.js"></script>
  */
 // set viewport for mobile devices
+var widthToSet = 1024, // width to achieve
+    scalable = false,  // make it scalable
+    minScale = 1,      // set minimum scale
+    maxScale = 1;      // set maximum scale
 var ios7safariregex = new RegExp(/.*iP[ha].*;.*CPU.*OS \d\_\d.*Safari.*/i);
 var ios7 = ios7safariregex.test(navigator.userAgent);
 var ie9 = navigator.userAgent.toLowerCase().indexOf( 'iemobile/9.0' ) != -1;
 var ie = navigator.userAgent.toLowerCase().indexOf( 'iemobile' ) != -1;
-var iwidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 if( ie9 ) {
-  document.write( '<meta name="viewport" content="width=device-width, user-scalable=yes">' );
+  document.write( '<meta name="viewport" content="width=device-width, user-scalable='+(scalable?'yes':'no')+'">' );
   document.write( '<link rel="stylesheet" type="text/css" href="/mobile/css/ie9.css" />' );
 } else if( ie  ) {
   document.write( '<link rel="stylesheet" type="text/css" href="/mobile/css/ie.css" />' );
 } else if ( navigator.userAgent.toLowerCase().indexOf( 'android 2.3.6' ) != -1  ) {
-  document.write( '<meta name="viewport" content="width='+($(window).width()>0?$(window).width()-80:640)+', user-scalable=yes">' );
+  document.write( '<meta name="viewport" content="width='+($(window).width()>0?$(window).width()-80:widthToSet)+', user-scalable='+(scalable?'yes':'no')+'">' );
 } else if (ios7) {
-  document.write( '<meta name="viewport" content="width=640, user-scalable=yes">' );
+  document.write( '<meta name="viewport" content="width='+widthToSet+', user-scalable='+(scalable?'yes':'no')+'">' );
 } else if ( navigator.userAgent.toLowerCase().indexOf( 'iphone' ) != -1 ) {
-  document.write( '<meta name="viewport" content="width=640, user-scalable=yes">' );
+  document.write( '<meta name="viewport" content="width='+widthToSet+', user-scalable='+(scalable?'yes':'no')+'">' );
 } else if ( navigator.userAgent.toLowerCase().indexOf( 'ipad' ) != -1 ) {
-  document.write( '<meta name="viewport" content="width=640, user-scalable=yes">' );
+  document.write( '<meta name="viewport" content="width='+widthToSet+', user-scalable='+(scalable?'yes':'no')+'">' );
 } else {
   document.write( '<meta name="viewport" content="width=360,initial-scale=1.0,target-densityDPI=360dpi">' );
   $(function(){
@@ -35,14 +38,13 @@ if( ie9 ) {
     setTimeout(function (){
       var w1 = $(window).height() < $(window).width() ? $(window).height() : $(window).width();
       $('meta[name="viewport"]').remove();
-      var px = 640;//target width to achieve
       var x = 360/w1;
-      var out = Math.ceil(px*x);
-      $('<meta name="viewport" id="the_vp_special" content="width=360,target-densityDPI='+out+'dpi,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes">').appendTo('head');//insert the new meta tag on the head  
+      var out = Math.ceil(widthToSet*x);
+      $('<meta name="viewport" id="the_vp_special" content="width=360,target-densityDPI='+out+'dpi,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable='+(scalable?'yes':'no')+'">').appendTo('head');//insert the new meta tag on the head  
       var dimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth
-      if (window.devicePixelRatio !== undefined && dimension != px) {
-        var viewPortScale = dimension / px;
-        $('#the_vp_special').attr('content', 'user-scalable=yes, initial-scale='+viewPortScale+',maximum-scale='+viewPortScale*8+',minimum-scale='+viewPortScale+', width=device-width');
+      if (window.devicePixelRatio !== undefined && dimension != widthToSet) {
+        var viewPortScale = dimension / widthToSet;
+        $('#the_vp_special').attr('content', 'user-scalable='+(scalable?'yes':'no')+', initial-scale='+viewPortScale+',maximum-scale='+(viewPortScale*maxScale)+',minimum-scale='+(viewPortScale*maxScale)+', width=device-width');
       }
     },250);
   });
