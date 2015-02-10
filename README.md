@@ -1,7 +1,7 @@
 # SetViewPort
 This small piece of JavaScript sets viewport of HTML page to the needed size
 
-Just add  to a <head> something like:
+Just add  to a head section something like:
 ```html
   <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
