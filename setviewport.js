@@ -45,7 +45,7 @@
         var dimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth
         if (window.devicePixelRatio !== undefined && dimension != widthToSet) {
           var viewPortScale = dimension / widthToSet;
-          $('#the_vp_special').attr('content', 'user-scalable='+(scalable?'yes':'no')+', initial-scale='+viewPortScale+',maximum-scale='+(viewPortScale*maxScale)+',minimum-scale='+(viewPortScale*maxScale)+', width=device-width');
+          $('#the_vp_special').attr('content', 'user-scalable='+(scalable?'yes':'no')+', initial-scale='+viewPortScale+',maximum-scale='+(viewPortScale*maxScale)+',minimum-scale='+(viewPortScale*minScale)+', width=device-width');
         }
       },250);
     });
