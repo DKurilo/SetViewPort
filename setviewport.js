@@ -1,7 +1,7 @@
 /*!
  * SetViewPort
  *
- * Copyright © 2015 Dmitry Kurilo | BSD & MIT license
+ * Copyright © 2015 Dmitry Kurilo | BSD & MIT license | https://github.com/DKurilo/SetViewPort
  *
  * Add to a <head>:
  * <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
